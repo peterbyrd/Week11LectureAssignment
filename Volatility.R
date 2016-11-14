@@ -6,18 +6,18 @@
 setwd("/Users/pbyrd/Git/Week11LectureAssignment")
 
 ## Install and load the following packages: 
-install.packages('tseries')
+# install.packages('tseries')
 library(tseries)
 
 ## Read the file
-SNPdata <- get.hist.quote('^gspc',quote="Close")
-length(SNPdata)
+AGIOdata <- get.hist.quote('agio',quote="Close")
+length(AGIOdata)
 
 ## Calculate Returns and Volatility
-SNPret  <- log(lag(SNPdata)) - log(SNPdata)
-SNPvol  <- sd(SNPret)*sqrt(250)*100
-length(SNPret)
-SNPvol
+AGIOret  <- log(lag(AGIOdata)) - log(AGIOdata)
+AGIOvol  <- sd(AGIOret)*sqrt(250)*100
+length(AGIOret)
+AGIOvol
 
 ## Create volatility function
 Vol <- function (d,logrets){
@@ -32,9 +32,9 @@ Vol <- function (d,logrets){
   sqrt(varlist)}
 
 ## Run three scenarios of d=10,30,100
-volest <- Vol(10,SNPret)
-volest2 <- Vol(30,SNPret)
-volest3 <- Vol(100,SNPret)
+volest <- Vol(10,AGIOret)
+volest2 <- Vol(30,AGIOret)
+volest3 <- Vol(100,AGIOret)
 
 ## Plot the volatility results
 plot(volest,type="l")

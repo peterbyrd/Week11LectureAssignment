@@ -7,8 +7,9 @@ output:
     keep_md: true
 ---
 
-# Financial Data and Volatility
+# AGIO Financial Data and Volatility
 
+Includes data from 2013-07-24 thru 2016-11-11.
 
 ## Load data
 First we must install packages and load the appropriate data from our data source.
@@ -22,18 +23,18 @@ setwd("/Users/pbyrd/Git/Week11LectureAssignment")
 library(tseries)
 
 ## Read the file
-SNPdata <- get.hist.quote('^gspc',quote="Close")
-length(SNPdata)
+AGIOdata <- get.hist.quote('agio',quote="Close")
+length(AGIOdata)
 ```
 
 ## Create a new dataset of Returns and calculate Volatility
 
 ```{r}
 ## Calculate Returns and Volatility
-SNPret  <- log(lag(SNPdata)) - log(SNPdata)
-SNPvol  <- sd(SNPret)*sqrt(250)*100
-length(SNPret)
-SNPvol
+AGIOret  <- log(lag(AGIOdata)) - log(AGIOdata)
+AGIOvol  <- sd(AGIOret)*sqrt(250)*100
+length(AGIOret)
+AGIOvol
 ```
 
 ## Creat a volatility function with lookback window
@@ -56,9 +57,9 @@ Vol <- function (d,logrets){
 
 ```{r}
 ## Run three scenarios of d=10,30,100
-volest <- Vol(10,SNPret)
-volest2 <- Vol(30,SNPret)
-volest3 <- Vol(100,SNPret)
+volest <- Vol(10,AGIOret)
+volest2 <- Vol(30,AGIOret)
+volest3 <- Vol(100,AGIOret)
 ```
 
 ## Plot the results
